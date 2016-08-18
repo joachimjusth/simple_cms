@@ -28,6 +28,20 @@ class SubjectsController < ApplicationController
   end
 
   def edit
+    @subject = Subject.find_by_id(params[:id])
+  end
+
+  def update
+    # Find an existing object using form parameters
+    @subject = Subject.find_by_id(params[:id])
+    # Save the object
+    if  @subject.update_attributes(subject_params)
+      # If update succeeds, redirect to the index action
+      redirect_to(:action => 'show', :id => @subject.id)
+    else
+      # If update fails, redisplay the form so user can fix problems
+      render('edit')
+    end
   end
 
   def delete
