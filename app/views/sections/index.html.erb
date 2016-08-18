@@ -15,6 +15,7 @@
       <th>Page ID</th>
       <th>Name</th>
       <th>Content Type</th>
+      <th>Content</th>
       <th>Visible</th>
       <th>Actions</th>
     </tr>
@@ -24,6 +25,7 @@
           <td><%= section.page_id %></td>
           <td><%= section.name %></td>
           <td class="center"><%= section.content_type %></td>
+          <td class="center"><%= section.content %></td>
           <td class="center"><%= section.visible ? 'Yes' : 'No' %></td>
           <td class="actions">
             <%= link_to('Show', {:action => 'show', :id => section.id}, :class => 'action show') %>
