@@ -3,6 +3,7 @@
 
   <%= link_to('Add New Section', {:action => 'new'}, :class => 'action new') %>
 
+  <div><%= pluralize(@sections.size, 'section') %> found</div>
   <table class="listing" summary="Section list">
     <tr class="header">
       <th>&nbsp;</th>
@@ -14,7 +15,7 @@
       <th>Actions</th>
     </tr>
     <% @sections.each do |section| %>
-        <tr>
+        <tr class="<%= cycle('odd', 'even') %>">
           <td><%= section.position %></td>
           <td><%= section.page_id %></td>
           <td><%= section.name %></td>
