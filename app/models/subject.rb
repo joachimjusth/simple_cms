@@ -4,11 +4,14 @@ class Subject < ApplicationRecord
 
   # Don't need to validate (in most cases):
   #   ids, foreign keys, timestamps, booleans, counters
-  validates_presence_of :name
-  validates_length_of :name, :maximum => 255
+  # validates_presence_of :name
+  # validates_length_of :name, :maximum => 255
   # validates_presance of vs. validates_length_of :minimum => 1
   # different error messages: "can't be blank" or "is too short"
   # validates_length_of allows strings with only spaces!
+
+  validates :name, :presence => true,
+                   :length => { :maximum => 255 }
 
   scope :visible, lambda { where(:visible => true) }
   scope :invisible, lambda { where(:visible => false) }
