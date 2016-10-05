@@ -8,6 +8,7 @@ class AdminUser < ApplicationRecord
   has_many :sections, :through => :section_edits
 
   EMAIL_REGEX = /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}\Z/i
+  FORBIDDEN_USERNAMES = ['littlebopeep', 'humptydumpty', 'marymary']
   # validates_presence_of :first_name
   # validates_length_of :first_name, :maximum => 25
   # validates_presence_of :last_name
@@ -32,5 +33,21 @@ class AdminUser < ApplicationRecord
                     :uniqueness => true,
                     :format => { :with => EMAIL_REGEX },
                     :confirmation => true
+  validate :username_is_allowed
+  # validate :no_new_users_on_saturday, :on => :create
+
+  def username_is_allowed
+    if FORBIDDEN_USERNAMES.include?(username)
+      errors.add(:username, "has been restricted from use.")
+    end
+  end
+
+  # Errors not related to a specific attribute
+  # can be added to errors[:base]
+  def no_new_users_on_saturday
+    if Time.now.wday == 6
+      errors[:base] << "No new users on Saturdays."
+    end
+  end
 
 end
