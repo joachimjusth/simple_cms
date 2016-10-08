@@ -1,10 +1,12 @@
 <%= link_to('<< Back to Admin Menu', {:controller => 'access',:action => 'index'}, :class => 'back-link') %>
 
+<%= link_to('<< Back to list of Page', {:controller => 'pages'}, :class => 'back-link') %>
+
 
 <div class="sections index">
   <h2>Sections</h2>
 
-  <%= link_to('Add New Section', {:action => 'new'}, :class => 'action new') %>
+  <%= link_to('Add New Section', {:action => 'new', :page_id => @page.id}, :class => 'action new') %>
 
   <div><%= pluralize(@sections.size, 'section') %> found</div>
   <table class="listing" summary="Section list">

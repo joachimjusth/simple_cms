@@ -1,10 +1,12 @@
 <%= link_to('<< Back to Admin Menu', {:controller => 'access',:action => 'index'}, :class => 'back-link') %>
 
+<%= link_to('<< Back to Subject', {:controller => 'subjects'}, :class => 'back-link') %>
+
 
 <div class="pages index">
-  <h2>Subjects</h2>
+  <h2>Pages</h2>
 
-  <%= link_to('Add New Page', {:action => 'new'}, :class => 'action new') %>
+  <%= link_to('Add New Page', {:action => 'new', :subject_id => @subject.id}, :class => 'action new') %>
 
   <div><%= pluralize(@pages.size, 'page') %> found</div>
   <table class="listing" summary="Subject list">
@@ -24,6 +26,7 @@
           <td class="center"><%= page.permalink %></td>
           <td class="center"><%= status_tag(page.visible) %></td>
           <td class="actions">
+            <%= link_to('View Sections', {:controller => 'sections', :page_id => page.id}, :class => 'action show') %>
             <%= link_to('Show', {:action => 'show', :id => page.id}, :class => 'action show') %>
             <%= link_to('Edit', {:action => 'edit', :id => page.id}, :class => 'action edit') %>
             <%= link_to('Delete', {:action => 'delete', :id => page.id}, :class => 'action delete') %>
