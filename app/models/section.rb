@@ -6,6 +6,8 @@ class Section < ApplicationRecord
 
   acts_as_list :scope => :page
 
+  after_save :touch_page
+
   CONTENT_TYPES = ['text', 'HTML']
 
   # validates_presence_of :name
@@ -23,5 +25,11 @@ class Section < ApplicationRecord
   scope :invisible, lambda { where(:visible => false) }
   scope :sorted, lambda { order('sections.position ASC') }
   scope :newest_first, lambda { order('sections.created DESC') }
+
+  private
+
+    def touch_page
+      page.touch
+    end
 
 end
